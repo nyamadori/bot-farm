@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904143418) do
+ActiveRecord::Schema.define(version: 20170904143857) do
 
   create_table "bots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20170904143418) do
     t.index ["team_id"], name: "index_channels_on_team_id"
   end
 
+  create_table "hooks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "description", null: false
+    t.integer "responder_type", null: false
+    t.json "responder_params"
+    t.bigint "bot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bot_id"], name: "index_hooks_on_bot_id"
+  end
+
   create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -62,5 +72,6 @@ ActiveRecord::Schema.define(version: 20170904143418) do
   add_foreign_key "channel_members", "channels"
   add_foreign_key "channel_members", "members"
   add_foreign_key "channels", "teams"
+  add_foreign_key "hooks", "bots"
   add_foreign_key "members", "teams"
 end
