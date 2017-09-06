@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20170904145119) do
 
   create_table "hooks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "description", null: false
-    t.integer "responder_type", null: false
-    t.json "responder_params"
+    t.integer "kind", null: false
+    t.json "params"
     t.bigint "bot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
