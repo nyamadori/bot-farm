@@ -14,6 +14,6 @@ class Hook < ApplicationRecord
   private
 
   def hook_kind
-    HookKind.class_get(kind).new(params: params)
+    HookKind.class_get(kind).new(params)
   end
 end
