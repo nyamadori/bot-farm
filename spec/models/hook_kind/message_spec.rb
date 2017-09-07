@@ -5,7 +5,7 @@ RSpec.describe HookKind::Message, type: :model do
     build(:hook_kind_message, pattern: 'echo (.+)')
   end
 
-  describe 'triggered_by?' do
+  describe '#triggered_by?' do
     subject do
       kind.triggered_by?(event)
     end
