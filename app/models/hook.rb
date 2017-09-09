@@ -13,6 +13,10 @@ class Hook < ApplicationRecord
     hook_kind.triggered_by?(event)
   end
 
+  def execute
+    Rails.logger.info("Hook##{id} execution requested")
+  end
+
   private
 
   def hook_kind
