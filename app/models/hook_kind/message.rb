@@ -3,7 +3,9 @@ module HookKind
     attr_accessor :pattern
 
     def triggered_by?(event)
-      event[:text].match?(pattern)
+      args = event[:text].match(pattern).try(:[], 1..-1)
+      hook.arguments = args
+      args.present?
     end
   end
 end
