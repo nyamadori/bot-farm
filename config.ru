@@ -3,3 +3,4 @@
 require_relative 'config/environment'
 
 run Rails.application
+SlackBot.new(Settings.slack.bot_user_access_token).start
