@@ -51,6 +51,7 @@ GEM
     enumerize (2.1.2)
       activesupport (>= 3.2)
     erubi (1.6.1)
+    eventmachine (1.2.3)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -61,6 +62,9 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.11.0.1)
       faraday (>= 0.7.4, < 1.0)
+    faye-websocket (0.10.7)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffaker (2.6.0)
     ffi (1.9.18)
     gli (2.16.0)
@@ -203,6 +207,7 @@ DEPENDENCIES
   config
   enumerize
   factory_girl_rails
+  faye-websocket
   ffaker
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
