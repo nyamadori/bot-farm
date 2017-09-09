@@ -17,6 +17,7 @@ gem 'config'
 gem 'enumerize'
 gem 'slack-ruby-client'
 gem 'faye-websocket'
+gem 'hashie'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
