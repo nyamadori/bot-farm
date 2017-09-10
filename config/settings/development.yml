@@ -1,0 +1,3 @@
+hook:
+  executor:
+    endpoint: http://localhost:3001
