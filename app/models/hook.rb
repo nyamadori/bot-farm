@@ -2,25 +2,30 @@ class Hook < ApplicationRecord
   belongs_to :bot
   has_many :hook_scripts
   has_many :scripts, through: :hook_scripts
-
-  attr_accessor :arguments
+  has_many :execution_requests
 
   enum kind: {
     message: 1,
     reaction: 2,
   }
 
-  def triggered_by?(event)
-    hook_kind.triggered_by?(event)
+  class << self
+    def find_from(event)
+      where(kind: event[:type]).find_each.find { |hook| hook.match(event) }
+    end
   end
 
-  def execute
-    Rails.logger.info("Hook##{id} execution requested")
+  def match(event)
+    hook_kind.match(event)
+  end
+
+  def perform(event)
+    execution_requests.new(event: event).perform
   end
 
   private
 
   def hook_kind
-    HookKind.class_get(kind).new(params.merge(hook: self))
+    HookKind.class_get(kind).new(params)
   end
 end

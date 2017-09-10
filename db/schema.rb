@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170910124108) do
 
   create_table "execution_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "hook_id", null: false
+    t.json "event"
     t.json "arguments"
     t.integer "status"
     t.datetime "created_at", null: false

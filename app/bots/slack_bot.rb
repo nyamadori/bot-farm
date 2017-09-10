@@ -13,10 +13,9 @@ class SlackBot
   private
 
   def bind_handlers
-    client.on :message do |data|
-      event = Event.new(data)
-      hook = event.find_hook
-      hook&.execute
+    client.on :message do |event|
+      hook = Hook.find_from(event)
+      hook&.perform(event)
     end
   end
 
