@@ -18,6 +18,7 @@ gem 'enumerize'
 gem 'slack-ruby-client'
 gem 'faye-websocket'
 gem 'hashie'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
