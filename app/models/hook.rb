@@ -1,7 +1,7 @@
 class Hook < ApplicationRecord
   belongs_to :bot
   has_many :hook_scripts
-  has_many :scripts, through: :hook_scripts
+  has_many :scripts, -> { order 'hook_scripts.order' }, through: :hook_scripts
   has_many :execution_requests
 
   enum kind: {
