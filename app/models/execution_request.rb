@@ -25,7 +25,7 @@ class ExecutionRequest < ApplicationRecord
     @response ||= connection.post('/events') do |req|
       req.body = {
         arguments: match,
-        scripts: hook.scripts.to_json
+        scripts: hook.scripts.pluck(:content)
       }
     end
   end
