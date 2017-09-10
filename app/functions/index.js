@@ -1,5 +1,7 @@
-'use strict';
+'use strict'
 
-exports.handler = (event, context, callback) => {
-  callback(null, { statusCode: 200, body: 'ok' })
-}
+const awsServerlessExpress = require('aws-serverless-express')
+const app = require('./app')
+const server = awsServerlessExpress.createServer(app, null)
+
+exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context)
