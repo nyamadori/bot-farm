@@ -227,6 +227,7 @@ DEPENDENCIES
   config
   enumerize
   factory_girl_rails
+  faraday
   faye-websocket
   ffaker
   hashie
