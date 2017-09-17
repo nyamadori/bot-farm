@@ -4,12 +4,12 @@ RSpec.describe HookKind::Message, type: :model do
   let!(:hook) { create(:hook) }
 
   let(:kind) do
-    build(:hook_kind_message, hook: hook, pattern: 'echo (.+)')
+    build(:hook_kind_message, pattern: 'echo (.+)')
   end
 
-  describe '#triggered_by?' do
+  describe '#match' do
     subject! do
-      kind.triggered_by?(event)
+      kind.match(event)
     end
 
     context 'when an event matches for pattern' do
@@ -19,8 +19,7 @@ RSpec.describe HookKind::Message, type: :model do
         }
       end
 
-      it { is_expected.to eq(true) }
-      it { expect(hook.arguments).to eq(['message']) }
+      it { is_expected.to eq(['message']) }
     end
 
     context 'when an event does not matches for pattern' do
@@ -30,8 +29,7 @@ RSpec.describe HookKind::Message, type: :model do
         }
       end
 
-      it { is_expected.to eq(false) }
-      it { expect(hook.arguments).to be_nil }
+      it { is_expected.to eq(nil) }
     end
   end
 end
