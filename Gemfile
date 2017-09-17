@@ -20,6 +20,7 @@ gem 'faye-websocket'
 gem 'hashie'
 gem 'sidekiq'
 gem 'faraday'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
