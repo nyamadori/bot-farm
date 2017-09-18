@@ -18,6 +18,7 @@ gem 'config'
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'factory_girl_rails'
 end
 
 group :development do
