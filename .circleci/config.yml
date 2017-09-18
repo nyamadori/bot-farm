@@ -35,7 +35,7 @@ jobs:
       # node dependencies
       - restore_cache:
           keys:
-            - node-dependencies-{{ checksum "yarn.lock" }
+            - node-dependencies-{{ checksum "yarn.lock" }}
             - node-dependencies-
 
       - run:
