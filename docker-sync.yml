@@ -4,7 +4,7 @@ options:
   verbose: true
 
 syncs:
-  app-sync:
+  botfarm-app-sync:
     notify_terminal: true
     src: .
     sync_excludes:
