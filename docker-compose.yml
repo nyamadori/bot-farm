@@ -1,13 +1,13 @@
 version: '3'
 services:
-  rails:
+  rails: &rails
     build: .
     volumes:
-      - .:/app
+      - .:/app:cached
       - gem-data:/usr/local/bundle
     depends_on:
       - mysql
-    command: ./bin/rails s
+    command: ./bin/rails server
 
   mysql:
     image: mysql:5.7
@@ -15,6 +15,13 @@ services:
       - mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'yes'
+
+  spring:
+    <<: *rails
+    command: ./bin/spring server
+    ports: []
+    tty: false
+    stdin_open: false
 
 volumes:
   mysql-data:

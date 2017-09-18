@@ -3,12 +3,6 @@ services:
   rails:
     ports:
       - 3000:3000
-    volumes:
-      - botfarm-app-sync:/app:nocopy
   mysql:
     ports:
       - 3307:3306
-
-volumes:
-  botfarm-app-sync:
-    external: true
