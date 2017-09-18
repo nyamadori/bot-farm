@@ -14,14 +14,12 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 'yes'
+      - MYSQL_ROOT_PASSWORD=pass
 
   spring:
     <<: *rails
     command: ./bin/spring server
     ports: []
-    tty: false
-    stdin_open: false
 
 volumes:
   mysql-data:
