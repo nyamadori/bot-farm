@@ -1,0 +1,10 @@
+mysql:
+  username: root
+  password: ''
+  host:     127.0.0.1
+  port:     3306
+
+slack:
+  client_id:             # TODO
+  client_secret:         # TODO
+  bot_user_access_token: # TODO
