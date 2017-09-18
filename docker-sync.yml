@@ -1,0 +1,13 @@
+version: '2'
+options:
+  compose-dev-file-path: docker-compose.local.yml
+  verbose: true
+
+syncs:
+  app-sync:
+    notify_terminal: true
+    src: .
+    sync_excludes:
+      - .gitignore
+      - .git/
+      - tmp/**/*

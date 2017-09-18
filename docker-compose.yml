@@ -1,0 +1,23 @@
+version: '3'
+services:
+  rails:
+    build: .
+    volumes:
+      - .:/app
+      - gem-data:/usr/local/bundle
+    depends_on:
+      - mysql
+    command: ./bin/rails s
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'yes'
+
+volumes:
+  mysql-data:
+    driver: local
+  gem-data:
+    driver: local
