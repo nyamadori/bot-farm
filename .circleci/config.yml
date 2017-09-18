@@ -31,6 +31,11 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
+      - run:
+          name: Setup local settings in CircleCI
+          command: |
+            cp ./.circleci/settings.local.yml ./config
+
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       - run:
