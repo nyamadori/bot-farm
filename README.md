@@ -1,24 +1,29 @@
-# README
+bot-farm
+========
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dependencies
+------------
 
-Things you may want to cover:
+### required
 
-* Ruby version
+* Ruby (>= 2.4.1)
+* [Yarn](https://yarnpkg.com/)
 
-* System dependencies
+## optional
 
-* Configuration
+* [direnv](https://github.com/direnv/direnv)
 
-* Database creation
+Getting Started
+---------------
 
-* Database initialization
+``` bash
+# clone this repo
+git clone git@github.com:nyamadori/bot-farm.git
 
-* How to run the test suite
+# make development environment for bot-farm
+cd bot-farm
+./bin/setup
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# boot bot-farm
+rails s
+```
