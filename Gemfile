@@ -34,6 +34,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'rspec_junit_formatter'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
