@@ -9,14 +9,14 @@ jobs:
     steps:
       - checkout
       - run: docker-compose build
-      - run: docker-compose exec rails ./bin/setup
-      - run: docker-compose exec rails ./bin/rubocop --parallel
+      - run: docker-compose run rails ./bin/setup
+      - run: docker-compose run rails ./bin/rubocop --parallel
       - run:
           name: Run spec
           command: |
-            docker-compose exec rails ./bin/rspec \
-                                      --format RspecJunitFormatter \
-                                      --out /tmp/test-results/rspec.xml
+            docker-compose run rails ./bin/rspec \
+                                     --format RspecJunitFormatter \
+                                     --out /tmp/test-results/rspec.xml
 
       - store_test_results:
           path: /tmp/test-results
