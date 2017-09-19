@@ -1,7 +1,9 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
+      image: circleci/classic:edge
+
     working_directory: ~/repo
 
     steps:
