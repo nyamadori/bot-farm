@@ -3,11 +3,15 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-
-    working_directory: ~/repo
-
     steps:
       - checkout
+      - restore_cache:
+        key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+        paths: ~/caches/images.tar
+      - run:
+          command: |
+            set +o pipefail
+            docker load -i ~/caches/images.tar | true
       - run: docker-compose build
       - run: docker-compose run rails ./bin/setup
       - run: docker-compose run rails ./bin/rubocop --parallel
@@ -17,7 +21,13 @@ jobs:
             docker-compose run rails ./bin/rspec \
                                      --format RspecJunitFormatter \
                                      --out /tmp/test-results/rspec.xml
-
+      - run:
+        command: |
+          mkdir -p ~/caches
+          docker save $(docker images -q) -o ~/caches/images.tar
+      - save_cache:
+          key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+          paths: ~/caches/images.tar
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
