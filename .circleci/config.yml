@@ -1,82 +1,33 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.4.1-node-browsers
-        environment:
-          NODE_ENV: test
-          RAILS_ENV: test
-          RACK_ENV: test
-      - image: circleci/mysql:5.7.18
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-
-    working_directory: ~/repo
-
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
-
-      # ruby dependencies
       - restore_cache:
-          keys:
-          - ruby-dependencies-{{ checksum "Gemfile.lock" }}
-          - ruby-dependencies-
-
+          key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+          paths: ~/caches/images.tar
       - run:
-          name: install ruby dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
+            set +o pipefail
+            docker load -i ~/caches/images.tar | true
+      - run: docker-compose build
+      - run: docker-compose run rails ./bin/setup
+      - run: docker-compose run rails ./bin/rubocop --parallel
+      - run:
+          name: Run spec
+          command: |
+            docker-compose run rails ./bin/rspec \
+                                     --format RspecJunitFormatter \
+                                     --out /tmp/test-results/rspec.xml
+      - run:
+          command: |
+            mkdir -p ~/caches
+            docker save $(docker images -q) -o ~/caches/images.tar
       - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: ruby-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # node dependencies
-      - restore_cache:
-          keys:
-            - node-dependencies-{{ checksum "yarn.lock" }}
-            - node-dependencies-
-
-      - run:
-          name: install node dependencies
-          command: yarn install
-
-      - save_cache:
-          key: node-dependencies-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - node_modules
-
-      # settings
-      - run:
-          name: setup local settings in CircleCI
-          command: |
-            cp ./.circleci/settings.local.yml ./config
-
-      # setup database
-      - run: bundle exec rake db:create db:schema:load
-
-      # linters
-      - run:
-          name: run rubocop
-          command: |
-            bundle exec rubocop --parallel
-
-      # ruby testings
-      - run:
-          name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-
-            bundle exec rspec --format progress \
-                            --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
-                            --format progress \
-                            "${TEST_FILES}"
-
-      # results
+          key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+          paths: ~/caches/images.tar
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:

@@ -1,0 +1,28 @@
+version: '3'
+services:
+  rails: &rails
+    build: .
+    volumes:
+      - .:/app:cached
+      - gem-data:/usr/local/bundle
+    depends_on:
+      - mysql
+    command: ./bin/rails server
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+
+  spring:
+    <<: *rails
+    command: ./bin/spring server
+    ports: []
+
+volumes:
+  mysql-data:
+    driver: local
+  gem-data:
+    driver: local
