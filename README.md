@@ -4,12 +4,17 @@ bot-farm
 Dependencies
 ------------
 
-### required
+### require
 
 * Ruby (>= 2.4.1)
 * [Yarn](https://yarnpkg.com/)
 
-## optional
+### recommend
+
+* Docker
+* Docker Compose
+
+### optional
 
 * [direnv](https://github.com/direnv/direnv)
 
@@ -22,8 +27,9 @@ git clone git@github.com:nyamadori/bot-farm.git
 
 # make development environment for bot-farm
 cd bot-farm
-./bin/setup
+docker-compose build
+docker-compose exec rails ./bin/setup
 
 # boot bot-farm
-rails s
+docker-compose exec spring rails server
 ```
