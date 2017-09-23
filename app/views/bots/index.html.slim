@@ -1,4 +1,10 @@
 div
   - @bots.each do |bot|
-    div
-      = bot.name
+    .card
+      .card-body
+        h4.card-title
+          = bot.name
+        p.card-text
+          = bot.description
+        a.card-link href="#" Edit
+        a.card-link href="#" Delete
