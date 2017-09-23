@@ -22,9 +22,9 @@ jobs:
                                      --format RspecJunitFormatter \
                                      --out /tmp/test-results/rspec.xml
       - run:
-        command: |
-          mkdir -p ~/caches
-          docker save $(docker images -q) -o ~/caches/images.tar
+          command: |
+            mkdir -p ~/caches
+            docker save $(docker images -q) -o ~/caches/images.tar
       - save_cache:
           key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
           paths: ~/caches/images.tar
