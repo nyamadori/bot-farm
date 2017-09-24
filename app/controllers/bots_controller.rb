@@ -19,7 +19,21 @@ class BotsController < ApplicationController
     end
   end
 
+  def update
+    @bot = Bot.find(params[:id])
+
+    if @bot.update(bot_params)
+      redirect_to @bot
+    else
+      render :new
+    end
+  end
+
   def show
+    @bot = Bot.find(params[:id])
+  end
+
+  def edit
     @bot = Bot.find(params[:id])
   end
 
