@@ -8,5 +8,6 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import 'bootstrap-sass'
+import 'holderjs'
 
 console.log('Hello World from Webpacker')
