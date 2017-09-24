@@ -5,3 +5,10 @@ p = @bot.description
 
 pre
   code = @bot.script
+
+ul.nav.nav-pills.pull-right
+  li
+    = link_to 'Edit', edit_bot_path(@bot)
+
+  li
+    = link_to 'Delete', @bot, method: :delete, data: { confirm: 'Are you sure?' }
