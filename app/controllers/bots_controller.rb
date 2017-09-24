@@ -19,6 +19,10 @@ class BotsController < ApplicationController
     end
   end
 
+  def show
+    @bot = Bot.find(params[:id])
+  end
+
   private
 
   def bot_params
