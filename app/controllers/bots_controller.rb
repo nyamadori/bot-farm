@@ -29,6 +29,12 @@ class BotsController < ApplicationController
     end
   end
 
+  def destroy
+    @bot = Bot.find(params[:id])
+    @bot.destroy
+    redirect_to bots_path
+  end
+
   def show
     @bot = Bot.find(params[:id])
   end
