@@ -21,6 +21,12 @@ services:
     command: ./bin/spring server
     ports: []
 
+  webpack-dev-server:
+    <<: *rails
+    command: ./bin/webpack-dev-server
+    ports:
+      - 8080:8080
+
 volumes:
   mysql-data:
     driver: local
