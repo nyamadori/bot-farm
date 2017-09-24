@@ -8,6 +8,8 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import 'bootstrap-sass'
-import 'holderjs'
+import Holder from 'holderjs'
 
-console.log('Hello World from Webpacker')
+document.addEventListener('turbolinks:load', () => {
+  Holder.run()
+})

@@ -1,11 +1,16 @@
+- breadcrumb :bots
+
 h1 ボット一覧
+
+ul.nav.nav-pills
+  li = link_to 'New Bot', new_bot_path
 
 div
   - @bots.each do |bot|
     = link_to bot, class: 'bot-item' do
       .media
         .media-left.media-middle
-          img src='holder.js/48x48'
+          img data-src='holder.js/48x48'
         .media-body
           h4.media-heading
             = bot.name
