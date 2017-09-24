@@ -1,10 +1,12 @@
+h1 ボット一覧
+
 div
   - @bots.each do |bot|
-    .card
-      .card-body
-        h4.card-title
-          = bot.name
-        p.card-text
+    = link_to bot, class: 'bot-item' do
+      .media
+        .media-left.media-middle
+          img src='holder.js/48x48'
+        .media-body
+          h4.media-heading
+            = bot.name
           = bot.description
-        a.card-link href="#" Edit
-        a.card-link href="#" Delete

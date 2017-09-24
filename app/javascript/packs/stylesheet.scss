@@ -1,1 +1,13 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+a.bot-item {
+  display: block;
+  padding: 8px;
+  border-radius: 2px;
+  color: $text-color;
+
+  &:hover {
+    text-decoration: none;
+    background: $dropdown-link-hover-bg;
+  }
+}
