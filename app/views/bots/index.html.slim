@@ -2,6 +2,9 @@
 
 h1 ボット一覧
 
+ul.nav.nav-pills
+  li = link_to 'New Bot', new_bot_path
+
 div
   - @bots.each do |bot|
     = link_to bot, class: 'bot-item' do
