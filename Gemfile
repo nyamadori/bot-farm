@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'config'
+gem 'gretel'
 gem 'jbuilder', '~> 2.5'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.7'
